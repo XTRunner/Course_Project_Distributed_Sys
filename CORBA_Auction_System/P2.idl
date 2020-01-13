@@ -1,0 +1,65 @@
+module P2App{
+
+
+	interface P2CallBack{
+		
+		void stateChange(in string changeInfo);
+		string stillAlive();
+		
+	};
+
+
+	interface P2{
+		
+		// Register for bank account
+		boolean regAccount(in string usrName);
+		void regNew(in string usrName, in string password);
+		
+		// Login
+		boolean login(in string usrName, in string password, in P2CallBack objref);
+
+		// Logout
+		void logout(in string usrName);
+
+		// Get items list
+		string getItems(in string usrName);
+		
+		// Seller: post items
+		long postItem(in string usrName, in string description, in long initial);
+		// Seller: lock current info
+		string lockItems(in string usrName, in long keyItem);
+		// Seller: unlock current info
+		void unlockItem(in string usrName, in long keyItem);
+		// Seller: sell item
+		string sell(in string usrName, in long keyItem);
+
+		// Bidder: put a bid
+		string bid(in string usrName, in long keyItem, in long money);
+
+		// Check if usr in auction
+		string closeAccount(in string usrName);
+		
+	};
+
+	interface Bank{
+
+		// Login
+		void regBank(in string usrName, in long balance);
+
+		// Add balance to usrName
+		void deposit(in string usrName, in long balance);
+
+		// minus balance to usrName
+		void withdraw(in string usrName, in long balance);
+
+		// Check if have enough money
+		boolean compareBank(in string usrName, in long money);
+
+		// Check cur balance
+		string checkBank(in string usrName);
+		string closeBank(in string usrName);
+		string depositBank(in string usrName, in long money);
+		string withdrawBank(in string usrName, in long money);
+
+	};
+};
