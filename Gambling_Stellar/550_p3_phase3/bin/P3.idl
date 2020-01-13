@@ -1,0 +1,35 @@
+module P3App{
+
+	interface P3CallBack{
+		void inform(in string deadline);
+		void inform_end();
+		void inform_msg(in string msg);
+	};
+
+	interface P3{
+		// register
+		string reg_account();
+		
+		// Login
+		string login_account(in string seed, in P3CallBack objref);
+		boolean login_bank(in string seed);
+		
+		// Banker start gambling
+		boolean check_before_gamble();
+		boolean start_gamble(in string deadline);
+		void start_timer(in string deadline);
+		
+		// Partitioner check if active gambling
+		string check_active_gamble();
+		
+		// Partitioner put bet
+		string put_bet(in string seed, in long bet, in string hash_value);
+		
+		// Verify hash_value
+		boolean verify_hash(in string seed, in string ran_num);
+		
+		string player_query_transac();
+		string banker_query_transac(in string seed);
+			
+	};
+};
